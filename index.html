@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch & Earn</title>
+    <!-- Telegram Mini App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Adsgram SDK -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .card {
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 320px;
+        }
+        h2 { margin-bottom: 8px; }
+        .balance {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 16px 0;
+        }
+        button {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+        button:active { background-color: #006699; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Reklama ko'rib pul toping</h2>
+    <p>Balansingiz:</p>
+    <div class="balance"><span id="coins">0</span> ball</div>
+    <button onclick="showAd()">Reklama ko'rish (+10 ball)</button>
+</div>
+
+<script>
+    window.Telegram.WebApp.ready();
+
+    let coins = 0;
+
+    const AdController = window.Adsgram.init({ blockId: "SIZNING_BLOCK_ID" });
+
+    function showAd() {
+        AdController.show().then((result) => {
+            coins += 10;
+            document.getElementById('coins').innerText = coins;
+            alert("Rahmat! 10 ball hisobingizga qo'shildi.");
+        }).catch((result) => {
+            alert("Reklama to'liq ko'rilmadi yoki xatolik yuz berdi.");
+        });
+    }
+</script>
+
+</body>
+</html>
